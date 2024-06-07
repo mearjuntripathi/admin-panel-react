@@ -1,0 +1,146 @@
+.component-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.component-box .box {
+    /* flex: 1; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    padding: 15px 20px;
+    max-width: 600px;
+    background-color: var(--box2-color);
+    cursor: pointer;
+    transition: var(--tran-03);
+}
+
+.component-box .box i {
+    font-size: 35px;
+    color: var(--text-color);
+}
+
+.component-box .box .text {
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.component-box .box .number {
+    white-space: nowrap;
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Popup.css */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.popup-close {
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-weight: bolder;
+    font-size: xx-large;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.popup-close:hover{
+    transform: scale(1.2);
+}
+
+.empty{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: larger;
+    font-weight: bolder;
+    color: var(--text-color);
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+form .input{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    border: none;
+}
+
+form .input input{
+    width: 100%;
+    border: 2px solid var(--primary-color);
+    padding: 5px 10px;
+    color: black;
+    border-radius: 10px;
+}
+
+form label{
+    font-weight: bolder;
+}
+
+form button{
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-weight: bolder;
+    background-color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.5s all ease-in-out;
+}
+
+form button:hover{
+    transform: scale(1.1)
+}
+
+.response .message{
+    padding: 5px 10px;
+    position: relative;
+    border-radius: 10px;
+    font-size: larger;
+    font-weight: bolder;
+    background-color: rgb(182, 255, 182);
+    color: green;
+}
+
+.response .error{
+    padding: 5px 10px;
+    position: relative;
+    border-radius: 10px;
+    font-size: larger;
+    font-weight: bolder;
+    background-color: rgb(255, 182, 182);
+    color: red;
+}

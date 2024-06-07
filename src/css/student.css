@@ -1,0 +1,177 @@
+.students .students-content {
+    padding-top: 50px;
+}
+
+.students-content .title {
+    display: flex;
+    align-items: center;
+    margin: 70px 0 30px 0;
+}
+
+.students-content .search-tools{
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.students-content .title i {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.students-content .title .text {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-left: 10px;
+}
+
+.students-content .boxes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.students-content .boxes .box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    padding: 15px 20px;
+    max-width: 600px;
+    background-color: var(--box1-color);
+    transition: var(--tran-03);
+}
+
+.boxes .box i {
+    font-size: 35px;
+    color: var(--text-color);
+}
+
+.boxes .box .text {
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.boxes .box .number {
+    white-space: nowrap;
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.boxes .box.box2 {
+    background-color: var(--box2-color);
+}
+
+.boxes .box.box3 {
+    background-color: var(--box3-color);
+}
+
+.students-content .activity .activity-data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    overflow: auto;
+}
+
+.activity-data .data {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+}
+
+.activity-data .data-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.activity-data .data .data-list {
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+.activity-data .status .data-list {
+    background-color: var(--primary-color);
+    width: fit-content;
+    border-radius: 5px;
+    color: #000;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.data-list img {
+    width: 30px;
+    border-radius: 50%;
+}
+
+.students-content .search-tools .search .input {
+    display: flex;
+    border: 1px solid var(--text-color);
+    border-radius: 15px;
+    padding: 3px 5px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.input input{
+    background: none;
+    outline: none; 
+    border: none;
+    color: var(--text-color);
+    font-size: medium;
+    width: 95%;
+}
+
+.input button{
+    border: none;
+    background-color: var(--primary-color);
+    padding: 3px 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: larger;
+}
+
+.students-content .search-tools .search{
+    display: flex;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 10px;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-color);
+}
+
+.search select{
+    border-radius: 15px;
+    outline: none;
+    font-weight: bolder;
+    font-size: medium;
+}
+
+@media (max-width: 800px) {
+    .search-tools, .search{
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}
