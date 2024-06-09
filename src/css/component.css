@@ -84,6 +84,39 @@
     color: var(--text-color);
 }
 
+.copyable-url {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.copyable-url input {
+    flex: 1;
+    margin-right: 5px;
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.copyable-url button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.copyable-url button:hover {
+    background-color: #0056b3;
+}
+
+
 form {
     display: flex;
     justify-content: center;

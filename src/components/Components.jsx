@@ -1,5 +1,5 @@
 import "../css/component.css"
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { sendOTP, updatePassword, createTest } from "../script/apis";
 
 function Preloader() {
@@ -142,9 +142,27 @@ const Popup = ({ show, onClose, children }) => {
     );
 };
 
+const CopyableUrl = ({ link }) => {
+    const urlRef = useRef(null);
+
+    const copyUrl = () => {
+        urlRef.current.select();
+        document.execCommand('copy');
+    };
+
+    return (
+        <div className="copyable-url">
+            <input ref={urlRef} type="text" readOnly value={link} />
+            <button onClick={copyUrl}><i className="uil uil-copy"></i>Copy URL</button>
+        </div>
+    );
+};
+
 const NewExamForm = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+    const [url, setUrl] = useState('');
+
     // Get today's date
     const today = new Date();
     // Increment by one day to get the next date
@@ -159,20 +177,24 @@ const NewExamForm = () => {
 
         try {
             const response = await createTest(formData);
-            setMessage(`Form submission successful. Link to fill the form: ${response.test_link}`);
+            const test_link = process.env.REACT_APP_URL + `?test_id=${response.test_id}`;
+            setMessage('Form submission successful. Link to fill the form:');
+            setUrl(test_link);
             setError('');
         } catch (error) {
             setError(error);
             setMessage('');
+            setUrl('');
         }
-    }
+    };
 
     return (
         <>
             <div className="response">
-                {message ? <p className="message">{message}</p> : null}
-                {error ? <p className="error">{error}</p> : null}
-            </div>
+                {message && <p className="message">{message}</p>}
+                {error && <p className="error">{error}</p>}
+                {url && <CopyableUrl link={url} />}
+                </div>
             <br />
             <hr />
             <form onSubmit={handleSubmit}>
@@ -181,12 +203,12 @@ const NewExamForm = () => {
                     <input type="text" placeholder="Enter Test Name" name="test_name" required />
                 </div>
                 <div className="input">
-                    <label htmlFor="">Upload CSV file of questios and answer:</label>
+                    <label htmlFor="">Upload CSV file of questions and answers:</label>
                     <input type="file" placeholder="Upload a CSV File for question answer" name="csv-file" required />
                 </div>
                 <div className="input">
                     <label htmlFor="">Set Timing of Exam:</label>
-                    <input type="number" placeholder="Enter timing in minute" name="test_timing" required />
+                    <input type="number" placeholder="Enter timing in minutes" name="test_timing" required />
                 </div>
                 <div className="input">
                     <label htmlFor="">Set Date when Held Exam:</label>
@@ -196,7 +218,7 @@ const NewExamForm = () => {
             </form>
         </>
     );
-}
+};
 
 
 const RequestOtp = ({ setStep, setEmail }) => {

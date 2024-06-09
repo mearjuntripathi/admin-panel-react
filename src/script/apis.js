@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const root_api = "http://localhost:5500/admin";
+const root_api = process.env.REACT_APP_ROOT_URL;
 
 async function login(email, password) {
     try {
