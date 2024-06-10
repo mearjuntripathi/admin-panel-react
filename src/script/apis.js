@@ -2,6 +2,15 @@ import axios from 'axios';
 
 const root_api = process.env.REACT_APP_ROOT_URL;
 
+async function signup(formData){
+    try {
+        const response = await axios.post(`${root_api}/auth/signup`, formData);
+        return response.data;
+    } catch (error) {
+        throw error.response ? error.response.data : new Error('Network Error');
+    }
+}
+
 async function login(email, password) {
     try {
         const response = await axios.post(`${root_api}/auth/login`, { email, password });
@@ -85,4 +94,4 @@ async function getStudents(test_id){
     }
 }
 
-export { login, getPastTest, getTestsList, sendOTP, updatePassword, createTest, getStudents };
+export { signup, login, getPastTest, getTestsList, sendOTP, updatePassword, createTest, getStudents };

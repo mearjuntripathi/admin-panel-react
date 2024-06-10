@@ -80,6 +80,16 @@
 }
 
 .container .message p{
+    background-color: rgb(200, 253, 185);
+    width: 90%;
+    margin: 5px auto;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: normal;
+    color: green;
+}
+
+.container .error p{
     background-color: rgb(253, 185, 185);
     width: 90%;
     margin: 5px auto;

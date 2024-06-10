@@ -5,6 +5,7 @@ import App from './pages/App';
 import Login from './pages/Login';
 import ForgetPassword from './pages/ForgetPassword';
 import Error from './pages/Error';
+import Signup from './pages/Signup';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
 	{
 		path: '/forget-password',
 		element: <ForgetPassword />
+	},
+	{
+		path: '/signup',
+		element: <Signup />
 	}
 ]);
 

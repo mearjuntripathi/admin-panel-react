@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 export default function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ export default function Login(props) {
             console.log('Login successful:', response);
             navigate('/');
         } catch (error) {
-            setMessage(error.error || 'An error occurred during login.');
+            setError(error.error || 'An error occurred during login.');
             console.error(error);
         }
     }
@@ -44,7 +44,7 @@ export default function Login(props) {
             <div className={styles.container}>
                 <h2>Welcome Back Admin!</h2>
                 <p>Log in to access your account</p>
-                {message && <div id="message" className={styles.message}><p>{message}</p></div>}
+                {error && <div className={styles.error}><p>{error}</p></div>}
                 <form className={styles.box} onSubmit={handleSubmit}>
                     <div className={styles.input}>
                         <i className="uil uil-envelope"></i>
@@ -71,7 +71,7 @@ export default function Login(props) {
                     </div>
                     <button type="submit" className={styles.input}>Login</button>
                     <Link to="/forget-password">Forget Password</Link>
-                    <p>Not a member? <a href="#signup">Join Us</a></p>
+                    <p>Not a member? <Link to="/signup">Join Us</Link></p>
                 </form>
             </div>
         </div>
