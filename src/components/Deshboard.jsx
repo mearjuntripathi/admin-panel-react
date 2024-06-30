@@ -3,6 +3,7 @@ import "../css/deshboard.css";
 import { Title, Box, ActivityData } from "./Components";
 import { deshboard, boxes } from "./components";
 import { getPastTest } from "../script/apis";
+import { Loading } from "./Components";
 
 export default function Deshboard() { 
     const [deshboardActivityData, setDeshboardActivityData] = useState({
@@ -10,9 +11,11 @@ export default function Deshboard() {
         "Dates": { className: "joined", childClass: "date", values: [] },
         "Status": { className: "status", childClass: "view-btn", values: [] }
     });
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchPastTests = async () => {
+            setLoading(true);
             try {
                 const response = await getPastTest();
                 const transformedData = {
@@ -35,6 +38,8 @@ export default function Deshboard() {
                 setDeshboardActivityData(transformedData);
             } catch (error) {
                 console.error("Error fetching past tests:", error);
+            } finally{
+                setLoading(false);
             }
         };
 
@@ -42,6 +47,8 @@ export default function Deshboard() {
     }, []);
 
     return (
+        <>
+        {loading && <Loading />}
         <div className="dash-content">
             <div className="overview">
                 <Title className={deshboard.className} name={deshboard.name} />
@@ -56,5 +63,6 @@ export default function Deshboard() {
                 </div>
             </div>
         </div>
+        </>
     );
 }

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Title, ActivityData } from "./Components";
 import { student } from "./components";
 import { getStudents } from "../script/apis";
+import { Loading } from "./Components";
+
 
 export default function Student(props) {
     const [testId, setTestId] = useState('');
@@ -34,14 +36,16 @@ export default function Student(props) {
         }
     });
 
+    const [loading, setLoading] = useState(false);
+
     const handleInputChange = (e) => {
         setTestId(e.target.value);
     };
 
     const fetchAllStudents = async () => {
+        setLoading(true);
         try {
             const response = await getStudents(testId);
-
             const transformedData = {
                 "Student Name": {
                     className: "names",
@@ -73,6 +77,8 @@ export default function Student(props) {
             setStudentActivityData(transformedData);
         } catch (error) {
             console.error('Error fetching students:', error);
+        } finally{
+            setLoading(false);
         }
     };
 
@@ -82,6 +88,8 @@ export default function Student(props) {
     };
 
     return (
+        <>
+        {loading && <Loading />}
         <div className="students-content">
             <div className="overview">
                 <Title className={student.className} name={student.name} />
@@ -109,5 +117,6 @@ export default function Student(props) {
                 </div>
             </div>
         </div>
+        </>
     );
 }

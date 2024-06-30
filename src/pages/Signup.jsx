@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { signup } from "../script/apis";
 import styles from "../css/login.module.css";
 import { Link, useNavigate } from 'react-router-dom';
+import { Loading } from '../components/Components';
+
 
 export default function Signup(props) {
 
@@ -14,6 +16,8 @@ export default function Signup(props) {
 
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
 
 
     function togglePassword() {
@@ -33,50 +37,56 @@ export default function Signup(props) {
         try {
             const response = await signup(formDataObject);
             setMessage(response.message);
+            setLoading(true);
         } catch (error) {
             setMessage(error.error || 'An error occurred during signup.');
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     }
 
-    return <div className={styles.main}>
-        <div className={styles.container}>
-            <h2>Welcome Admin!</h2>
-            <p>Sign up to create your account</p>
-            {message && <div className={styles.message}><p className={styles.success}>{message}</p></div>}
-            {error && <div className={styles.message}><p className={styles.error}>{error}</p></div>}            
-            <form className={styles.box} onSubmit={handleSubmit}>
-                <div className={styles.input}>
-                    <i className="uil uil-user"></i>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Enter Your Name"
-                        required
-                    />
-                </div>
-                <div className={styles.input}>
-                    <i className="uil uil-envelope"></i>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Enter Email"
-                        required
-                    />
-                </div>
-                <div className={`${styles.input} ${styles.password}`}>
-                    <i className="uil uil-lock" id="icon" onClick={togglePassword}></i>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Enter Your Password"
-                        required
-                    />
-                </div>
-                <button type="submit" className={styles.input}>Signup</button>
-                <p>Have a account? <Link to="/login">login</Link></p>
-            </form>
+    return <>
+        {loading && <Loading />}
+        <div className={styles.main}>
+            <div className={styles.container}>
+                <h2>Welcome Admin!</h2>
+                <p>Sign up to create your account</p>
+                {message && <div className={styles.message}><p className={styles.success}>{message}</p></div>}
+                {error && <div className={styles.message}><p className={styles.error}>{error}</p></div>}
+                <form className={styles.box} onSubmit={handleSubmit}>
+                    <div className={styles.input}>
+                        <i className="uil uil-user"></i>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter Your Name"
+                            required
+                        />
+                    </div>
+                    <div className={styles.input}>
+                        <i className="uil uil-envelope"></i>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter Email"
+                            required
+                        />
+                    </div>
+                    <div className={`${styles.input} ${styles.password}`}>
+                        <i className="uil uil-lock" id="icon" onClick={togglePassword}></i>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter Your Password"
+                            required
+                        />
+                    </div>
+                    <button type="submit" className={styles.input}>Signup</button>
+                    <p>Have a account? <Link to="/login">login</Link></p>
+                </form>
+            </div>
         </div>
-    </div>
+    </>
 }

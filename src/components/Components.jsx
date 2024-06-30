@@ -14,6 +14,15 @@ function Preloader() {
     </div>);
 };
 
+const Loading = () => (
+    <div className="loading-overlay">
+        <div className="loading-content">
+            <div className="loading-circle"></div>
+            <p>This might take a moment, hang tight!</p>
+        </div>
+    </div>
+);
+
 function Logo({ img, name }) {
     return (<div className="logo-name">
         <div className="logo-image">
@@ -162,6 +171,8 @@ const NewExamForm = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [url, setUrl] = useState('');
+    const [loading, setLoading] = useState(false);
+    
 
     // Get today's date
     const today = new Date();
@@ -172,9 +183,9 @@ const NewExamForm = () => {
     const formattedNextDate = nextDate.toISOString().split('T')[0];
 
     const handleSubmit = async (e) => {
+        setLoading(true);
         e.preventDefault();
         const formData = new FormData(e.target);
-
         try {
             const response = await createTest(formData);
             const test_link = process.env.REACT_APP_URL + `?test_id=${response.test_id}`;
@@ -185,11 +196,14 @@ const NewExamForm = () => {
             setError(error);
             setMessage('');
             setUrl('');
+        } finally{
+            setLoading(false);
         }
     };
 
     return (
         <>
+            {loading && <Loading />}
             <div className="response">
                 {message && <p className="message">{message}</p>}
                 {error && <p className="error">{error}</p>}
@@ -204,7 +218,7 @@ const NewExamForm = () => {
                 </div>
                 <div className="input">
                     <label htmlFor="">Upload CSV file of questions and answers:</label>
-                    <input type="file" placeholder="Upload a CSV File for question answer" name="csv-file" required />
+                    <input type="file" placeholder="Upload a CSV File for question answer" typeof="csv" name="csv-file" required />
                 </div>
                 <div className="input">
                     <label htmlFor="">Set Timing of Exam:</label>
@@ -313,4 +327,4 @@ const ResetPassword = ({ email }) => {
     );
 };
 
-export { Preloader, Logo, Navitem, DarkModeToggle, Panel, Box, Title, ActivityData, NotificationData, Popup, NewExamForm, RequestOtp, ResetPassword };
+export { Preloader, Loading, Logo, Navitem, DarkModeToggle, Panel, Box, Title, ActivityData, NotificationData, Popup, NewExamForm, RequestOtp, ResetPassword };
